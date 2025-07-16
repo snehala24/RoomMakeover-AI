@@ -1,0 +1,22 @@
+﻿# Core
+openai
+langchain
+google-generativeai
+python-dotenv
+
+# Computer Vision
+ultralytics
+opencv-python
+segment-anything
+transformers
+
+# Web & Backend
+streamlit
+fastapi
+uvicorn
+python-multipart
+
+# Scraping (optional)
+serpapi
+beautifulsoup4
+requests
