@@ -50,16 +50,17 @@ RoomMakeover.AI is an intelligent room enhancement tool that:
 RoomMakeover.AI/
 │
 ├── app/
-│ ├── pipeline.py # Full makeover pipeline
-│ ├── llm_suggester.py # Gemini prompt and response
-│ ├── embedder.py # (Optional) Feature vector builder
-│ ├── vector_store.py # (Optional) Vector database logic
+│   ├── __init__.py
+│   ├── pipeline.py          # Main function: image_to_makeover()
+│   ├── llm_suggester.py     # Gemini prompt handling and JSON output
+│   └── yolo_utils.py        # (Optional) Object detection helper (YOLOv8)
 │
-├── streamlit_app.py # Main app file
+├── assets/                  # (Optional) Sample images / icons / CSS
+│
+├── .env                     # Your Gemini API key
 ├── requirements.txt
-├── .env # Gemini API key
-└── README.md
-
+├── README.md
+└── streamlit_app.py         # Main UI: Streamlit frontend
 
 
 ---
