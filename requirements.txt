@@ -1,4 +1,4 @@
-﻿# Core
+# Core AI & ML
 openai
 langchain
 google-generativeai
@@ -7,8 +7,7 @@ python-dotenv
 # Computer Vision
 ultralytics
 opencv-python
-segment-anything
-transformers
+Pillow
 
 # Web & Backend
 streamlit
@@ -16,7 +15,16 @@ fastapi
 uvicorn
 python-multipart
 
-# Scraping (optional)
-serpapi
-beautifulsoup4
+# Data Processing
+numpy
+pandas
+json5
+
+# E-commerce & Web Scraping (optional)
 requests
+beautifulsoup4
+serpapi
+
+# Additional utilities
+python-dotenv
+collections-extended
