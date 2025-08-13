@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "USB PD Specification Table of Contents Schema",
+  "description": "Schema for USB Power Delivery specification Table of Contents entries",
+  "type": "object",
+  "properties": {
+    "doc_title": {
+      "type": "string",
+      "description": "Document name or version for reference",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "section_id": {
+      "type": "string",
+      "description": "Hierarchical section identifier (e.g., '2.1.2')",
+      "pattern": "^[0-9]+(?:\\.[0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 20
+    },
+    "title": {
+      "type": "string",
+      "description": "Section title without numbering",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "page": {
+      "type": "integer",
+      "description": "Starting page number of the section",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "level": {
+      "type": "integer",
+      "description": "Depth level (chapter = 1, section = 2, etc.)",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "parent_id": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(?:\\.[0-9]+)*$",
+          "description": "Immediate parent section ID"
+        },
+        {
+          "type": "null",
+          "description": "Null for top-level sections"
+        }
+      ]
+    },
+    "full_path": {
+      "type": "string",
+      "description": "Concatenation of section_id and title",
+      "minLength": 1,
+      "maxLength": 600
+    },
+    "tags": {
+      "type": "array",
+      "description": "Optional semantic labels",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "uniqueItems": true,
+      "maxItems": 20
+    }
+  },
+  "required": [
+    "doc_title",
+    "section_id", 
+    "title",
+    "page",
+    "level",
+    "parent_id",
+    "full_path",
+    "tags"
+  ],
+  "additionalProperties": false
+}

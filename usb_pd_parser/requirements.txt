@@ -1,0 +1,26 @@
+# USB PD Specification Parser Dependencies
+
+# PDF processing libraries
+pdfplumber>=0.11.0
+PyMuPDF>=1.26.0
+
+# Data manipulation and Excel generation
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# JSON schema validation
+jsonschema>=4.0.0
+
+# Advanced regex support
+regex>=2023.0.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# Standard library extras (usually included with Python)
+# pathlib (built-in Python 3.4+)
+# logging (built-in)
+# datetime (built-in)
+# typing (built-in Python 3.5+)
+# dataclasses (built-in Python 3.7+)
+# collections (built-in)
