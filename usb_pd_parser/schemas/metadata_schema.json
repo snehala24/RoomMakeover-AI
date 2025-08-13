@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "USB PD Specification Metadata Schema",
+  "description": "Schema for document metadata and parsing statistics",
+  "type": "object",
+  "properties": {
+    "doc_title": {
+      "type": "string",
+      "description": "Full document title",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "doc_version": {
+      "type": "string",
+      "description": "Document version or revision",
+      "maxLength": 50
+    },
+    "doc_date": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Document publication date (YYYY-MM-DD format)"
+    },
+    "total_pages": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Total number of pages in the document"
+    },
+    "parsing_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the document was parsed (ISO 8601 format)"
+    },
+    "parser_version": {
+      "type": "string",
+      "description": "Version of the parsing system used",
+      "maxLength": 20
+    },
+    "toc_statistics": {
+      "type": "object",
+      "properties": {
+        "total_sections": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of sections found in ToC"
+        },
+        "max_level": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum nesting level found"
+        },
+        "level_distribution": {
+          "type": "object",
+          "patternProperties": {
+            "^[1-9][0-9]*$": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "description": "Count of sections at each level"
+        }
+      },
+      "required": ["total_sections", "max_level", "level_distribution"]
+    },
+    "content_statistics": {
+      "type": "object",
+      "properties": {
+        "total_sections_parsed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of content sections parsed"
+        },
+        "total_tables": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of tables found"
+        },
+        "total_figures": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of figures found"
+        },
+        "total_word_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Approximate total word count"
+        },
+        "content_type_distribution": {
+          "type": "object",
+          "properties": {
+            "text": {"type": "integer", "minimum": 0},
+            "table": {"type": "integer", "minimum": 0},
+            "figure": {"type": "integer", "minimum": 0},
+            "code": {"type": "integer", "minimum": 0},
+            "protocol": {"type": "integer", "minimum": 0},
+            "state_machine": {"type": "integer", "minimum": 0},
+            "mixed": {"type": "integer", "minimum": 0}
+          },
+          "description": "Distribution of content types"
+        }
+      },
+      "required": ["total_sections_parsed", "total_tables", "total_figures", "total_word_count", "content_type_distribution"]
+    },
+    "parsing_quality": {
+      "type": "object",
+      "properties": {
+        "overall_confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Overall parsing confidence score"
+        },
+        "toc_match_rate": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Percentage of ToC sections successfully matched in content"
+        },
+        "extraction_errors": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of extraction errors encountered"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": "List of parsing warnings"
+        }
+      },
+      "required": ["overall_confidence", "toc_match_rate", "extraction_errors", "warnings"]
+    },
+    "file_info": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Original PDF filename"
+        },
+        "file_size": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "File size in bytes"
+        },
+        "pdf_creator": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "null"}
+          ],
+          "description": "PDF creator application"
+        },
+        "pdf_version": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "null"}
+          ],
+          "description": "PDF version"
+        }
+      },
+      "required": ["filename", "file_size"]
+    }
+  },
+  "required": [
+    "doc_title",
+    "total_pages",
+    "parsing_timestamp",
+    "parser_version",
+    "toc_statistics",
+    "content_statistics",
+    "parsing_quality",
+    "file_info"
+  ],
+  "additionalProperties": false
+}

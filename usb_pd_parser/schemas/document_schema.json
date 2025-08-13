@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "USB PD Specification Document Section Schema",
+  "description": "Schema for USB Power Delivery specification document sections with enhanced metadata",
+  "type": "object",
+  "properties": {
+    "doc_title": {
+      "type": "string",
+      "description": "Document name or version for reference",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "section_id": {
+      "type": "string",
+      "description": "Hierarchical section identifier (e.g., '2.1.2')",
+      "pattern": "^[0-9]+(?:\\.[0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 20
+    },
+    "title": {
+      "type": "string",
+      "description": "Section title without numbering",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "page_start": {
+      "type": "integer",
+      "description": "Starting page number of the section",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "page_end": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Ending page number of the section (null if unknown)"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Depth level (chapter = 1, section = 2, etc.)",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "parent_id": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(?:\\.[0-9]+)*$",
+          "description": "Immediate parent section ID"
+        },
+        {
+          "type": "null",
+          "description": "Null for top-level sections"
+        }
+      ]
+    },
+    "full_path": {
+      "type": "string",
+      "description": "Concatenation of section_id and title",
+      "minLength": 1,
+      "maxLength": 600
+    },
+    "content": {
+      "type": "string",
+      "description": "Extracted text content of the section",
+      "maxLength": 100000
+    },
+    "content_type": {
+      "type": "string",
+      "enum": ["text", "table", "figure", "code", "protocol", "state_machine", "mixed"],
+      "description": "Type of content in this section"
+    },
+    "has_tables": {
+      "type": "boolean",
+      "description": "Whether the section contains tables"
+    },
+    "has_figures": {
+      "type": "boolean",
+      "description": "Whether the section contains figures"
+    },
+    "table_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of tables in the section"
+    },
+    "figure_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of figures in the section"
+    },
+    "word_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Approximate word count in the section"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Semantic labels and keywords",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "uniqueItems": true,
+      "maxItems": 20
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence score for parsing accuracy (0.0 to 1.0)"
+    },
+    "extraction_notes": {
+      "type": "array",
+      "description": "Notes about extraction challenges or issues",
+      "items": {
+        "type": "string",
+        "maxLength": 200
+      },
+      "maxItems": 10
+    }
+  },
+  "required": [
+    "doc_title",
+    "section_id", 
+    "title",
+    "page_start",
+    "level",
+    "parent_id",
+    "full_path",
+    "content",
+    "content_type",
+    "has_tables",
+    "has_figures",
+    "table_count",
+    "figure_count",
+    "word_count",
+    "tags",
+    "confidence_score"
+  ],
+  "additionalProperties": false
+}
